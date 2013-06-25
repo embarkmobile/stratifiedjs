@@ -27,6 +27,7 @@ function build_deps() {
 
   PSEUDO("build");
   BUILD("build", function() { log('all done') }, ["stratified.js",
+                                                  "stratified-bare.js",
                                                   "stratified-node.js",
                                                   "modules/numeric.sjs",
                                                   "modules/sjcl.sjs",
@@ -137,6 +138,16 @@ function build_deps() {
 
   //----------------------------------------------------------------------
   // apollo lib
+
+  // bare version:
+  BUILD("stratified-bare.js",
+        ["cat $0 $1 $2 > $TARGET",
+         replacements_from_config
+        ],
+        ["src/headers/oni-apollo.js.txt",
+         "tmp/vm1client.js.min",
+         "tmp/c1.js.min",
+         "src/build/config.json"]);
 
   // xbrowser version:
   BUILD("stratified.js",
